@@ -3,10 +3,15 @@ import { createMusicUrlHandler, createRouter, jsonResponse } from "@songloft/plu
 import type { HTTPRequest, HTTPResponse } from "@songloft/plugin-sdk";
 
 // BBC Learning English -> Songloft playlists.
-// Source: the m3u8 lists at https://bbc.wegoto.top (built live from the BBC RSS feeds).
+// Source: m3u8 lists built hourly from the BBC RSS feeds by this repo's GitHub Action.
 
 const ENTRY = "bbc-learning-english";
-const DEFAULT_SOURCE = "https://bbc.wegoto.top";
+// Built hourly by GitHub Actions (scripts/build-playlists.mjs) on the `playlists` branch.
+const DEFAULT_SOURCE = "https://raw.githubusercontent.com/jerryrat/BBC-LEARNING/playlists";
+// Earlier versions defaulted to these; saved settings still holding one are moved to DEFAULT_SOURCE.
+const OLD_SOURCES = ["https://bbc.wegoto.top"];
+// Used when the primary source fails (e.g. raw.githubusercontent.com blocked).
+const FALLBACK_SOURCE = "https://cdn.jsdelivr.net/gh/jerryrat/BBC-LEARNING@playlists";
 const ARTIST = "BBC Learning English";
 
 const FEEDS = [
@@ -77,7 +82,7 @@ async function current(): Promise<State> {
   if (state) return state;
   const saved = ((await songloft.storage.get("state")) || {}) as Partial<State>;
   state = {
-    settings: { ...DEFAULTS, ...(saved.settings || {}) },
+    settings: migrate({ ...DEFAULTS, ...(saved.settings || {}) }),
     playlists: saved.playlists || {},
     statuses: saved.statuses || {},
     lastRun: saved.lastRun,
@@ -85,6 +90,11 @@ async function current(): Promise<State> {
   };
   return state;
 }
+function migrate(s: Settings): Settings {
+  if (OLD_SOURCES.indexOf(s.source.replace(/\/+$/, "")) >= 0) s.source = DEFAULT_SOURCE;
+  return s;
+}
+
 async function save(): Promise<void> {
   if (state) await songloft.storage.set("state", state);
 }
@@ -134,7 +144,18 @@ export function parseM3U(text: string, fallbackCover: string): Episode[] {
 }
 
 async function fetchFeed(source: string, slug: string): Promise<{ episodes: Episode[]; cover: string }> {
-  const url = source.replace(/\/+$/, "") + "/" + slug + ".m3u8";
+  const base = source.replace(/\/+$/, "");
+  try {
+    return await fetchFrom(base, slug);
+  } catch (e) {
+    if (base !== DEFAULT_SOURCE) throw e;
+    songloft.log.warn(slug + ": GitHub raw failed (" + ((e as any)?.message || e) + "), trying jsDelivr");
+    return await fetchFrom(FALLBACK_SOURCE, slug);
+  }
+}
+
+async function fetchFrom(base: string, slug: string): Promise<{ episodes: Episode[]; cover: string }> {
+  const url = base + "/" + slug + ".m3u8";
   const res = await fetch(url, {
     headers: { "User-Agent": "Songloft-BBC-Plugin/1.0", "X-Fetch-Timeout-Ms": "30000" },
   });
