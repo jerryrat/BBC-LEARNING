@@ -1,6 +1,6 @@
 {
   "name": "bbc-learning-english",
-  "version": "2026.11.20.5",
+  "version": "2026.11.20.6",
   "description": "BBC Learning English podcasts as auto-updating Songloft playlists",
   "private": true,
   "scripts": {

@@ -33,18 +33,25 @@
       $('last').textContent = state.busy ? '同步中…' :
         (state.lastRun ? '上次同步 ' + time(state.lastRun) : '尚未同步');
       $('sync').disabled = !!state.busy;
+      // Keep unsaved ticks across the 2 s refresh while a sync runs.
+      var ticked = {};
+      var boxes = document.querySelectorAll('#rows input[type=checkbox]');
+      Array.prototype.forEach.call(boxes, function (c) { ticked[c.getAttribute('data-slug')] = c.checked; });
       var html = '';
       state.feeds.forEach(function (f) {
         var st = state.statuses[f.slug] || {};
-        var on = s.feeds.indexOf(f.slug) >= 0;
-        var info = st.count != null
-          ? st.count + ' 集' + (st.added ? '，新增 ' + st.added : '') + (st.removed ? '，移除 ' + st.removed : '') +
-            '<div class="muted">最新：' + esc(st.newest) + '</div><div class="muted">' + time(st.lastSuccess) + '</div>'
-          : '<span class="muted">未同步</span>';
-        if (st.error) info += '<div class="err">' + esc(st.error) + '</div>';
-        html += '<tr><td><input type="checkbox" data-slug="' + f.slug + '"' + (on ? ' checked' : '') + '></td>' +
-          '<td>' + esc(f.name) + '<div class="muted">' + esc(s.source + '/' + f.slug + '.m3u8') + '</div></td>' +
-          '<td>' + info + '</td></tr>';
+        var on = boxes.length ? !!ticked[f.slug] : s.feeds.indexOf(f.slug) >= 0;
+        var count = st.count != null
+          ? st.count + ' 集' + (st.added ? ' · +' + st.added : '') + (st.removed ? ' · -' + st.removed : '')
+          : '未同步';
+        var detail = '';
+        if (st.newest) detail += '<div class="muted line">最新：' + esc(st.newest) + '</div>';
+        if (st.lastSuccess) detail += '<div class="muted">' + time(st.lastSuccess) + '</div>';
+        if (st.error) detail += '<div class="err">' + esc(st.error) + '</div>';
+        html += '<label class="feed"><input type="checkbox" data-slug="' + f.slug + '"' + (on ? ' checked' : '') + '>' +
+          '<div class="body"><div class="top"><span class="name">' + esc(f.name) + '</span>' +
+          '<span class="count' + (st.count != null ? '' : ' muted') + '">' + count + '</span></div>' +
+          detail + '</div></label>';
       });
       $('rows').innerHTML = html;
     }

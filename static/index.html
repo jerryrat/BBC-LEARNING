@@ -5,27 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>BBC Learning English</title>
   <style>
-    .wrap { max-width: 760px; margin: 0 auto; padding: 16px; }
-    .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin: 8px 0; }
-    .row label { min-width: 110px; }
-    .row input[type=text], .row input[type=number] { flex: 1; min-width: 120px; padding: 8px; border-radius: 8px; border: 1px solid var(--md-sys-color-outline, #888); background: transparent; color: inherit; }
-    table { width: 100%; border-collapse: collapse; }
-    td, th { padding: 8px 6px; border-bottom: 1px solid var(--md-sys-color-outline-variant, #ddd); text-align: left; font-size: 14px; vertical-align: top; }
+    * { box-sizing: border-box; }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 12px; }
+    .card h2 { margin: 0 0 4px; font-size: 20px; }
     .muted { opacity: .7; font-size: 12px; }
-    .err { color: var(--md-sys-color-error, #b3261e); font-size: 12px; }
-    .btns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
-    #msg { min-height: 20px; margin-top: 8px; }
+    .err { color: var(--md-sys-color-error, #b3261e); font-size: 12px; overflow-wrap: anywhere; }
+    .form { display: grid; grid-template-columns: max-content 1fr; gap: 10px 12px; align-items: center; margin-top: 12px; }
+    .form label { white-space: nowrap; }
+    .form .field { display: flex; align-items: center; gap: 8px; min-width: 0; }
+    .form input { width: 100%; min-width: 0; padding: 8px 10px; border-radius: 8px;
+      border: 1px solid var(--md-sys-color-outline, #888); background: transparent; color: inherit; font-size: 14px; }
+    .form .hint { white-space: nowrap; }
+    .btns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+    #msg { min-height: 18px; margin-top: 8px; }
+    .head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+    .feed { display: flex; gap: 10px; align-items: flex-start; padding: 10px 0;
+      border-top: 1px solid var(--md-sys-color-outline-variant, #ddd); }
+    .feed input[type=checkbox] { width: 18px; height: 18px; margin: 2px 0 0; flex: none; }
+    .feed .body { flex: 1; min-width: 0; }
+    .feed .top { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+    .feed .name { font-weight: 500; min-width: 0; overflow-wrap: anywhere; }
+    .feed .count { white-space: nowrap; font-size: 13px; }
+    .feed .line { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    @media (max-width: 520px) {
+      .wrap { padding: 8px; }
+      .form { grid-template-columns: 1fr; gap: 4px; }
+      .form label { margin-top: 6px; font-size: 13px; opacity: .8; }
+      .btns .btn { flex: 1; }
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="card">
-      <h2 style="margin-top:0">BBC Learning English</h2>
-      <p class="muted">自动把 9 个 BBC Learning English 播客同步成歌单，按间隔重新拉取播放列表，新一期会自动出现在歌单最前面。</p>
-      <div class="row"><label>播放列表源</label><input type="text" id="source"></div>
-      <div class="row"><label>同步间隔（分钟）</label><input type="number" id="interval" min="10" max="1440"></div>
-      <div class="row"><label>每单最多集数</label><input type="number" id="max" min="0" max="5000"><span class="muted">0 = 全部</span></div>
-      <div class="row"><label>歌单名前缀</label><input type="text" id="prefix"></div>
+      <h2>BBC Learning English</h2>
+      <div class="muted">把 9 个 BBC Learning English 播客同步成歌单，按间隔自动拉取，新一期出现在歌单最前面。</div>
+      <div class="form">
+        <label for="source">播放列表源</label>
+        <div class="field"><input type="url" id="source" autocomplete="off"></div>
+        <label for="interval">同步间隔（分钟）</label>
+        <div class="field"><input type="number" id="interval" min="10" max="1440" inputmode="numeric"></div>
+        <label for="max">每单最多集数</label>
+        <div class="field"><input type="number" id="max" min="0" max="5000" inputmode="numeric"><span class="muted hint">0 = 全部</span></div>
+        <label for="prefix">歌单名前缀</label>
+        <div class="field"><input type="text" id="prefix"></div>
+      </div>
       <div class="btns">
         <button class="btn btn-filled" id="save">保存设置</button>
         <button class="btn btn-outlined" id="sync">立即同步</button>
@@ -33,11 +57,8 @@
       <div id="msg" class="muted"></div>
     </div>
     <div class="card">
-      <div class="row" style="justify-content:space-between"><strong>节目</strong><span class="muted" id="last"></span></div>
-      <table>
-        <thead><tr><th>同步</th><th>节目</th><th>状态</th></tr></thead>
-        <tbody id="rows"></tbody>
-      </table>
+      <div class="head"><strong>节目</strong><span class="muted" id="last"></span></div>
+      <div id="rows"></div>
     </div>
   </div>
   <script src="static/js/app.js"></script>
