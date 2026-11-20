@@ -1,0 +1,92 @@
+[
+  {
+    "slug": "6-minute-english",
+    "id": "p02pc9tn",
+    "name": "6 Minute English",
+    "count": 350,
+    "newest": "2026-11-19 Are microplastics harming us?",
+    "m3u8": "https://raw.githubusercontent.com/jerryrat/BBC-LEARNING/playlists/6-minute-english.m3u8",
+    "cdn": "https://cdn.jsdelivr.net/gh/jerryrat/BBC-LEARNING@playlists/6-minute-english.m3u8",
+    "rss": "https://podcasts.files.bbci.co.uk/p02pc9tn.rss"
+  },
+  {
+    "slug": "easy-english",
+    "id": "p0hsrwv5",
+    "name": "Learning Easy English",
+    "count": 128,
+    "newest": "2026-11-13 Talking about the countryside",
+    "m3u8": "https://raw.githubusercontent.com/jerryrat/BBC-LEARNING/playlists/easy-english.m3u8",
+    "cdn": "https://cdn.jsdelivr.net/gh/jerryrat/BBC-LEARNING@playlists/easy-english.m3u8",
+    "rss": "https://podcasts.files.bbci.co.uk/p0hsrwv5.rss"
+  },
+  {
+    "slug": "news",
+    "id": "p05hw4bq",
+    "name": "Learning English from the News",
+    "count": 403,
+    "newest": "2026-11-18 AI exam cheat confesses",
+    "m3u8": "https://raw.githubusercontent.com/jerryrat/BBC-LEARNING/playlists/news.m3u8",
+    "cdn": "https://cdn.jsdelivr.net/gh/jerryrat/BBC-LEARNING@playlists/news.m3u8",
+    "rss": "https://podcasts.files.bbci.co.uk/p05hw4bq.rss"
+  },
+  {
+    "slug": "conversations",
+    "id": "p02pc9zn",
+    "name": "Learning English Conversations",
+    "count": 834,
+    "newest": "2026-11-17 The English We Speak: In for a treat",
+    "m3u8": "https://raw.githubusercontent.com/jerryrat/BBC-LEARNING/playlists/conversations.m3u8",
+    "cdn": "https://cdn.jsdelivr.net/gh/jerryrat/BBC-LEARNING@playlists/conversations.m3u8",
+    "rss": "https://podcasts.files.bbci.co.uk/p02pc9zn.rss"
+  },
+  {
+    "slug": "vocabulary",
+    "id": "p02pc9xz",
+    "name": "Learning English Vocabulary",
+    "count": 427,
+    "newest": "2026-11-16 Pronouncing words that start with ‘c’",
+    "m3u8": "https://raw.githubusercontent.com/jerryrat/BBC-LEARNING/playlists/vocabulary.m3u8",
+    "cdn": "https://cdn.jsdelivr.net/gh/jerryrat/BBC-LEARNING@playlists/vocabulary.m3u8",
+    "rss": "https://podcasts.files.bbci.co.uk/p02pc9xz.rss"
+  },
+  {
+    "slug": "grammar",
+    "id": "p02pc9wq",
+    "name": "Learning English Grammar",
+    "count": 335,
+    "newest": "2026-11-17 Hobbies",
+    "m3u8": "https://raw.githubusercontent.com/jerryrat/BBC-LEARNING/playlists/grammar.m3u8",
+    "cdn": "https://cdn.jsdelivr.net/gh/jerryrat/BBC-LEARNING@playlists/grammar.m3u8",
+    "rss": "https://podcasts.files.bbci.co.uk/p02pc9wq.rss"
+  },
+  {
+    "slug": "stories",
+    "id": "p02pc9s1",
+    "name": "Learning English Stories",
+    "count": 292,
+    "newest": "2026-11-13 Classic Stories: 20，000 Leagues Under the Sea",
+    "m3u8": "https://raw.githubusercontent.com/jerryrat/BBC-LEARNING/playlists/stories.m3u8",
+    "cdn": "https://cdn.jsdelivr.net/gh/jerryrat/BBC-LEARNING@playlists/stories.m3u8",
+    "rss": "https://podcasts.files.bbci.co.uk/p02pc9s1.rss"
+  },
+  {
+    "slug": "work",
+    "id": "p0h6ffwg",
+    "name": "Learning English For Work",
+    "count": 113,
+    "newest": "2026-08-17 Office English: Plans and strategies",
+    "m3u8": "https://raw.githubusercontent.com/jerryrat/BBC-LEARNING/playlists/work.m3u8",
+    "cdn": "https://cdn.jsdelivr.net/gh/jerryrat/BBC-LEARNING@playlists/work.m3u8",
+    "rss": "https://podcasts.files.bbci.co.uk/p0h6ffwg.rss"
+  },
+  {
+    "slug": "chinese",
+    "id": "p02pc9st",
+    "name": "BBC英语教学",
+    "count": 9,
+    "newest": "2026-11-18 “你问我答”：“Last Saturday” 是上周六吗？英语中易混淆的时间表达",
+    "m3u8": "https://raw.githubusercontent.com/jerryrat/BBC-LEARNING/playlists/chinese.m3u8",
+    "cdn": "https://cdn.jsdelivr.net/gh/jerryrat/BBC-LEARNING@playlists/chinese.m3u8",
+    "rss": "https://podcasts.files.bbci.co.uk/p02pc9st.rss"
+  }
+]
