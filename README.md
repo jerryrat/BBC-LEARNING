@@ -22,7 +22,9 @@ Songloft 客户端：设置 → JS 插件管理 → 插件商店 → 管理订�
 
     https://raw.githubusercontent.com/jerryrat/BBC-LEARNING/main/registry.json
 
-然后在商店里安装「BBC Learning English」。也可以从 [Releases](https://github.com/jerryrat/BBC-LEARNING/releases) 下载 `bbc-learning-english.jsplugin.zip` 手动上传。
+然后在商店里安装「BBC Learning English」。本仓库带 `songloft-plugin` topic，也能在插件商店的「GitHub 发现」里直接找到。
+
+手动安装：下载 **[bbc-learning-english.jsplugin.zip（最新版）](https://github.com/jerryrat/BBC-LEARNING/releases/latest/download/bbc-learning-english.jsplugin.zip)**，在 Songloft 设置 → JS 插件管理 里上传该 zip（不要解压）。
 
 安装后几秒内开始第一次同步（9 个歌单 `BBC · <节目名>`，约 2900 集）。
 
