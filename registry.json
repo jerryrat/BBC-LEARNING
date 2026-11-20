@@ -1,0 +1,6 @@
+{
+  "name": "BBC Learning English",
+  "plugins": [
+    "https://raw.githubusercontent.com/jerryrat/BBC-LEARNING/main/plugin.json"
+  ]
+}

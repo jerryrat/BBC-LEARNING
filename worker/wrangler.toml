@@ -1,0 +1,12 @@
+name = "bbc-m3u8"
+main = "src/worker.js"
+compatibility_date = "2024-11-01"
+workers_dev = true
+
+routes = [
+  { pattern = "bbc.wegoto.top", custom_domain = true }
+]
+
+# Songloft plugin files (built by songloft-plugin/publish.mjs), served before the worker.
+[assets]
+directory = "public"

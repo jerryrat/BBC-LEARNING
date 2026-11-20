@@ -1,0 +1,6 @@
+{
+  "name": "BBC Learning English",
+  "plugins": [
+    "https://bbc.wegoto.top/songloft/plugin.json"
+  ]
+}

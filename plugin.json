@@ -1,0 +1,24 @@
+{
+  "$schema": "https://raw.githubusercontent.com/songloft-org/plugin-toolchain/main/schemas/plugin.schema.json",
+  "name": "BBC Learning English",
+  "version": "2026.11.20.4",
+  "description": "自动同步 BBC Learning English 9 个播客为歌单，定时拉取最新一期",
+  "author": "jerryrat",
+  "homepage": "https://github.com/jerryrat/BBC-LEARNING",
+  "license": "MIT",
+  "icon": "icon.svg",
+  "entryPath": "bbc-learning-english",
+  "main": "main.js",
+  "minHostVersion": "2.13.10",
+  "permissions": [
+    "storage",
+    "songs.read",
+    "songs.write",
+    "playlists.read",
+    "playlists.write"
+  ],
+  "updateUrl": "https://raw.githubusercontent.com/jerryrat/BBC-LEARNING/main/plugin.json",
+  "download_url": "https://github.com/jerryrat/BBC-LEARNING/releases/download/v2026.11.20.4/bbc-learning-english.jsplugin.zip",
+  "entryHash": "ef359031318a24b2dcb3171a9bccfaead16e8943f000ecfb6c8acf8e23a1ae2f",
+  "zipHash": "131599231fbe12114eea878766507c7bdf5cb3b7171ce5142ea3608eec54a9eb"
+}

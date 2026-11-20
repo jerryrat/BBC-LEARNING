@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>BBC Learning English</title>
+  <style>
+    .wrap { max-width: 760px; margin: 0 auto; padding: 16px; }
+    .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin: 8px 0; }
+    .row label { min-width: 110px; }
+    .row input[type=text], .row input[type=number] { flex: 1; min-width: 120px; padding: 8px; border-radius: 8px; border: 1px solid var(--md-sys-color-outline, #888); background: transparent; color: inherit; }
+    table { width: 100%; border-collapse: collapse; }
+    td, th { padding: 8px 6px; border-bottom: 1px solid var(--md-sys-color-outline-variant, #ddd); text-align: left; font-size: 14px; vertical-align: top; }
+    .muted { opacity: .7; font-size: 12px; }
+    .err { color: var(--md-sys-color-error, #b3261e); font-size: 12px; }
+    .btns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    #msg { min-height: 20px; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h2 style="margin-top:0">BBC Learning English</h2>
+      <p class="muted">自动把 9 个 BBC Learning English 播客同步成歌单，按间隔重新拉取播放列表，新一期会自动出现在歌单最前面。</p>
+      <div class="row"><label>播放列表源</label><input type="text" id="source"></div>
+      <div class="row"><label>同步间隔（分钟）</label><input type="number" id="interval" min="10" max="1440"></div>
+      <div class="row"><label>每单最多集数</label><input type="number" id="max" min="0" max="5000"><span class="muted">0 = 全部</span></div>
+      <div class="row"><label>歌单名前缀</label><input type="text" id="prefix"></div>
+      <div class="btns">
+        <button class="btn btn-filled" id="save">保存设置</button>
+        <button class="btn btn-outlined" id="sync">立即同步</button>
+      </div>
+      <div id="msg" class="muted"></div>
+    </div>
+    <div class="card">
+      <div class="row" style="justify-content:space-between"><strong>节目</strong><span class="muted" id="last"></span></div>
+      <table>
+        <thead><tr><th>同步</th><th>节目</th><th>状态</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </div>
+  <script src="static/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "name": "bbc-learning-english",
+  "version": "2026.11.20.4",
+  "description": "BBC Learning English podcasts as auto-updating Songloft playlists",
+  "private": true,
+  "scripts": {
+    "build": "songloft-plugin build",
+    "dev": "songloft-plugin dev",
+    "validate": "songloft-plugin validate",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@songloft/plugin-builder": "^2.24.0",
+    "@songloft/plugin-sdk": "^2.24.0",
+    "typescript": "^5.7.0"
+  },
+  "license": "MIT"
+}
