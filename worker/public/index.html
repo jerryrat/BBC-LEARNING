@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1b1f27">
+<title>BBC Learning English 播放器</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="player.css">
+</head>
+<body>
+<div class="bg" id="bg"></div>
+<div class="app">
+  <header class="top">
+    <button class="icon-btn" id="btn-lists" title="节目列表" aria-label="节目列表">
+      <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h12"/></svg>
+    </button>
+    <div class="top-title" id="top-title">BBC Learning English</div>
+    <button class="icon-btn" id="btn-more" title="订阅 / 下载" aria-label="更多">
+      <svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>
+    </button>
+  </header>
+
+  <nav class="shows" id="shows" aria-label="节目"></nav>
+
+  <main class="stage">
+    <section class="cover-wrap">
+      <img class="cover" id="cover" alt="">
+    </section>
+    <section class="side" id="side">
+      <div class="side-tabs">
+        <button class="tab active" data-tab="info">简介</button>
+        <button class="tab" data-tab="queue">列表 <span id="queue-count"></span></button>
+      </div>
+      <div class="tab-body" id="tab-info">
+        <div class="summary" id="summary"></div>
+        <a class="pill" id="page-link" target="_blank" rel="noopener">文稿 / 练习 ↗</a>
+      </div>
+      <div class="tab-body hidden" id="tab-queue">
+        <input class="search" id="search" type="search" placeholder="搜索本节目">
+        <ol class="queue" id="queue"></ol>
+      </div>
+    </section>
+  </main>
+
+  <section class="meta">
+    <h1 id="title">加载中…</h1>
+    <p id="subtitle">BBC</p>
+  </section>
+
+  <section class="progress">
+    <span id="cur">00:00</span>
+    <div class="bar" id="bar" role="slider" aria-label="进度" tabindex="0">
+      <div class="bar-buf" id="bar-buf"></div>
+      <div class="bar-fill" id="bar-fill"></div>
+      <div class="bar-dot" id="bar-dot"></div>
+    </div>
+    <span id="dur">00:00</span>
+  </section>
+
+  <section class="controls">
+    <button class="side-btn" id="btn-mode" title="播放顺序">
+      <svg viewBox="0 0 24 24" id="mode-icon"></svg><span id="mode-text">顺序播放</span>
+    </button>
+    <div class="main-btns">
+      <button class="icon-btn" id="btn-back" title="后退 15 秒"><svg viewBox="0 0 24 24"><path d="M11 5 4 12l7 7M20 5l-7 7 7 7"/></svg><i>15</i></button>
+      <button class="icon-btn" id="btn-prev" title="上一集"><svg viewBox="0 0 24 24"><path d="M6 5v14M19 5 9 12l10 7z" class="fill"/></svg></button>
+      <button class="play" id="btn-play" title="播放 / 暂停 (空格)"><svg viewBox="0 0 24 24" id="play-icon"><path d="M8 5v14l11-7z" class="fill"/></svg></button>
+      <button class="icon-btn" id="btn-next" title="下一集"><svg viewBox="0 0 24 24"><path d="M18 5v14M5 5l10 7-10 7z" class="fill"/></svg></button>
+      <button class="icon-btn" id="btn-fwd" title="前进 15 秒"><svg viewBox="0 0 24 24"><path d="M13 5l7 7-7 7M4 5l7 7-7 7"/></svg><i>15</i></button>
+    </div>
+    <button class="side-btn" id="btn-fav" title="收藏"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><span>收藏</span></button>
+  </section>
+
+  <section class="bottom">
+    <div class="vol">
+      <button class="icon-btn small" id="btn-mute" title="静音"><svg viewBox="0 0 24 24" id="vol-icon"></svg></button>
+      <input type="range" id="vol" min="0" max="1" step="0.05" value="1" aria-label="音量">
+    </div>
+    <button class="text-btn" id="btn-rate" title="倍速">1x</button>
+    <button class="icon-btn small" id="btn-queue" title="播放列表"><svg viewBox="0 0 24 24"><path d="M4 6h12M4 11h12M4 16h8M17 14v6l4-3z"/></svg></button>
+  </section>
+</div>
+
+<div class="sheet hidden" id="more">
+  <div class="sheet-card">
+    <h3>订阅 / 下载</h3>
+    <p>每个节目都有播放列表文件，可放进 VLC、PotPlayer 等播放器；GitHub Actions 每小时自动更新。</p>
+    <div id="links"></div>
+    <p><a href="https://github.com/jerryrat/BBC-LEARNING" target="_blank" rel="noopener">GitHub 仓库</a> ·
+       <a href="https://www.bbc.co.uk/learningenglish/english/podcasts" target="_blank" rel="noopener">BBC 原站</a></p>
+    <p class="note">快捷键：空格 播放/暂停 · ← → 后退/前进 5 秒 · Shift+← → 上一集/下一集 · [ ] 调速</p>
+    <button class="text-btn" id="more-close">关闭</button>
+  </div>
+</div>
+<audio id="audio" preload="metadata"></audio>
+<script src="player.js"></script>
+</body>
+</html>
