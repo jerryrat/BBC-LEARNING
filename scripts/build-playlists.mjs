@@ -107,7 +107,7 @@ table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid #ddd;pad
 a{color:#b80000}code{background:#f3f3f3;padding:2px 4px;word-break:break-all}</style></head><body>
 <h1>BBC Learning English 播放列表</h1>
 <p>来源 <a href="https://www.bbc.co.uk/learningenglish/english/podcasts">BBC Learning English Podcasts</a>，GitHub Actions 每小时自动更新，最新一期在最前。</p>
-<p>播放器地址：<code>${RAW}/&lt;节目&gt;.m3u8</code>（国内可用 <code>${CDN}/&lt;节目&gt;.m3u8</code>）</p>
+<p>播放器地址：<code>${RAW}/&lt;节目&gt;.m3u8</code>（国内可用 <code>${CDN}/&lt;节目&gt;.m3u</code>，jsDelivr 上请用 .m3u 后缀）</p>
 <table><tr><th>节目</th><th>M3U8</th><th>集数</th><th>最新</th><th>原始</th></tr>
 ${tr}
 </table>
@@ -137,13 +137,17 @@ async function main() {
       text = readFileSync(file, "utf8");
     }
     writeFileSync(join(out, feed.slug + ".m3u8"), text);
+    // Same content as .m3u: jsDelivr serves .m3u8 as HLS (VLC then fails), .m3u as audio/x-mpegurl.
+    writeFileSync(join(out, feed.slug + ".m3u"), text);
     const count = text.split("\n").filter((l) => l.startsWith("https://")).length;
     const first = text.split("\n").find((l) => l.startsWith("#EXTINF:")) || "";
     rows.push({ ...feed, count, newest: first.slice(first.indexOf(",") + 1) });
     parts.push(text.split("\n").filter((l) => l && !/^#(EXTM3U|PLAYLIST|EXTIMG)/.test(l)).join("\n") + "\n");
     console.log(`${feed.slug}: ${count}`);
   }
-  writeFileSync(join(out, "all.m3u8"), "#EXTM3U\n#PLAYLIST:BBC Learning English (all)\n" + parts.join(""));
+  const all = "#EXTM3U\n#PLAYLIST:BBC Learning English (all)\n" + parts.join("");
+  writeFileSync(join(out, "all.m3u8"), all);
+  writeFileSync(join(out, "all.m3u"), all);
   writeFileSync(
     join(out, "index.json"),
     JSON.stringify(
@@ -154,7 +158,7 @@ async function main() {
         count: r.count,
         newest: r.newest,
         m3u8: `${RAW}/${r.slug}.m3u8`,
-        cdn: `${CDN}/${r.slug}.m3u8`,
+        cdn: `${CDN}/${r.slug}.m3u`,
         rss: `https://podcasts.files.bbci.co.uk/${r.id}.rss`,
       })),
       null,

@@ -2,7 +2,7 @@ name: Update playlists
 
 # Fetch the BBC RSS feeds every hour and publish the m3u8 files on the `playlists` branch:
 #   https://raw.githubusercontent.com/jerryrat/BBC-LEARNING/playlists/<slug>.m3u8
-#   https://cdn.jsdelivr.net/gh/jerryrat/BBC-LEARNING@playlists/<slug>.m3u8
+#   https://cdn.jsdelivr.net/gh/jerryrat/BBC-LEARNING@playlists/<slug>.m3u   (.m3u on jsDelivr: .m3u8 is served as HLS)
 on:
   schedule:
     - cron: "17 * * * *"
@@ -65,7 +65,7 @@ jobs:
           git commit -q -m "Update playlists $(date -u +%Y-%m-%dT%H:%MZ)"
           git push -q origin HEAD:playlists
           # Refresh the jsDelivr copy right away (it caches branch files for up to 12 h).
-          for f in *.m3u8 index.json; do
+          for f in *.m3u8 *.m3u index.json; do
             curl -s -o /dev/null "https://purge.jsdelivr.net/gh/${{ github.repository }}@playlists/$f" || true
           done
 
