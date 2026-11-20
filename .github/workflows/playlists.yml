@@ -65,7 +65,7 @@ jobs:
           git commit -q -m "Update playlists $(date -u +%Y-%m-%dT%H:%MZ)"
           git push -q origin HEAD:playlists
           # Refresh the jsDelivr copy right away (it caches branch files for up to 12 h).
-          for f in *.m3u8 *.m3u index.json; do
+          for f in *.m3u8 *.m3u *.json; do
             curl -s -o /dev/null "https://purge.jsdelivr.net/gh/${{ github.repository }}@playlists/$f" || true
           done
 

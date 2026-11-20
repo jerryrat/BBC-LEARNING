@@ -41,6 +41,26 @@ function clean(s) {
   return s.replace(/<[^>]+>/g, "").replace(/[\r\n]+/g, " ").replace(/,/g, "，").trim();
 }
 
+// Plain-text summary: links and the BBC boilerplate ("FIND BBC LEARNING ENGLISH HERE", "Sign up to our newsletter" ...)
+// are cut off; a paragraph that starts with boilerplate is dropped.
+const BOILER = /\b(FIND BBC LEARNING ENGLISH HERE|Visit our website|Follow us|LIKE PODCASTS|Sign up to|Get the video version|Watch this podcast|Let us know|improve your English with more|find out more)\b/i;
+function summaryOf(html) {
+  const out = [];
+  for (const raw of html.split(/<\/p>|<br\s*\/?>/i)) {
+    let p = decodeEntities(raw.replace(/<[^>]+>/g, " ")).replace(/https?:\/\/\S+/g, "").replace(/\s+/g, " ").trim();
+    const cut = p.search(BOILER);
+    if (cut >= 0) p = p.slice(0, cut).trim();
+    if (p.length > 3) out.push(p);
+  }
+  return out.join("\n").slice(0, 1200);
+}
+// Episode page (transcript / worksheet) when the description links one, else the BBC programme page.
+function pageOf(html, link) {
+  const pages = html.match(/https:\/\/www\.bbc\.co\.uk\/learningenglish\/[^"<\s]+/g) || [];
+  const ep = pages.find((u) => /\/(features|course|english\/[a-z-]+)\/[^/]+\/[^/]+/.test(u) && !/followus|send\//.test(u));
+  return (ep || link || "").replace(/^http:/, "https:");
+}
+
 export function parseFeed(xml) {
   const channel = xml.split("<item>")[0];
   const image = attr(channel, "itunes:image", "href").replace(/^http:/, "https:");
@@ -56,6 +76,8 @@ export function parseFeed(xml) {
       date: tag(it, "pubDate"),
       image: (attr(it, "itunes:image", "href") || image).replace(/^http:/, "https:"),
       url,
+      summary: summaryOf(tag(it, "description") || tag(it, "itunes:summary")),
+      link: pageOf(tag(it, "description"), tag(it, "link")),
     });
   }
   return { image, items };
@@ -128,6 +150,27 @@ async function main() {
       const parsed = parseFeed(await fetchRSS(feed));
       if (!parsed.items.length) throw new Error("feed has no episodes");
       text = toM3U8(feed, parsed);
+      // Web player data (bbc.wegoto.top): same episodes plus summary and episode page.
+      writeFileSync(
+        join(out, feed.slug + ".json"),
+        JSON.stringify({
+          slug: feed.slug,
+          name: feed.name,
+          image: parsed.image,
+          episodes: parsed.items.map((i) => {
+            const d = i.date ? new Date(i.date) : null;
+            return {
+              title: i.title,
+              date: d && !isNaN(d) ? d.toISOString().slice(0, 10) : "",
+              duration: i.duration,
+              image: i.image,
+              url: i.url,
+              summary: i.summary,
+              link: i.link,
+            };
+          }),
+        }) + "\n",
+      );
     } catch (e) {
       // Keep the previous file when BBC is briefly unavailable; fail only if there is nothing to keep.
       const file = join(out, feed.slug + ".m3u8");
