@@ -7,6 +7,10 @@
 <title>BBC Learning English 播放器</title>
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="BBC English">
+<link rel="apple-touch-icon" href="icon-192.png">
+<script src="install.js" defer></script>
 <link rel="stylesheet" href="player.css">
 </head>
 <body>
@@ -22,6 +26,15 @@
     </button>
   </header>
 
+  <aside class="install-banner hidden" id="install-banner" aria-label="安装到桌面">
+    <span class="install-copy"><strong>安装到桌面</strong><span>像 App 一样直接打开，随时听英语</span></span>
+    <button class="install-action" id="install-action">安装</button>
+    <button class="install-close" id="install-close" aria-label="关闭安装提示">×</button>
+  </aside>
+  <dialog class="install-guide" id="install-guide">
+    <h3>添加到桌面</h3><p id="install-instructions"></p>
+    <form method="dialog"><button class="install-action">知道了</button></form>
+  </dialog>
   <nav class="shows" id="shows" aria-label="节目"></nav>
 
   <main class="stage">

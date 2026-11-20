@@ -149,3 +149,16 @@ svg .fill { fill: currentColor; stroke: none; }
   .bottom { order: 5; }
   .side { order: 6; margin-top: 18px; }
 }
+
+.install-banner { flex:none; display:flex; align-items:center; gap:12px; padding:10px 14px; margin:4px 0 10px; border:1px solid rgba(90,200,250,.3); border-radius:12px; background:rgba(90,200,250,.12); }
+.install-copy { flex:1; min-width:0; display:flex; align-items:baseline; gap:12px; font-size:13px; }
+.install-copy strong { white-space:nowrap; font-size:14px; }
+.install-copy span { color:var(--muted); }
+.install-action { flex:none; padding:8px 16px; background:var(--accent); color:var(--accent-ink); border-radius:9px; font-size:14px; font-weight:600; }
+.install-close { flex:none; width:26px; height:32px; color:var(--muted); font-size:24px; }
+.install-guide { color:var(--fg); background:#252a34; border:1px solid var(--line); border-radius:16px; max-width:420px; width:calc(100% - 32px); padding:24px; }
+.install-guide::backdrop { background:rgba(0,0,0,.6); }
+.install-guide h3 { margin-top:0; }
+.install-guide p { line-height:1.8; font-size:14px; }
+.install-guide form { text-align:right; }
+@media(max-width:520px) { .install-copy { display:block; } .install-copy span { display:block; font-size:11px; margin-top:3px; } .install-banner { gap:8px; padding:10px; } }
