@@ -33,8 +33,8 @@
     "slug": "conversations",
     "id": "p02pc9zn",
     "name": "Learning English Conversations",
-    "count": 834,
-    "newest": "2026-11-17 The English We Speak: In for a treat",
+    "count": 835,
+    "newest": "2026-11-24 A regular fixture",
     "m3u8": "https://raw.githubusercontent.com/jerryrat/BBC-LEARNING/playlists/conversations.m3u8",
     "cdn": "https://cdn.jsdelivr.net/gh/jerryrat/BBC-LEARNING@playlists/conversations.m3u",
     "rss": "https://podcasts.files.bbci.co.uk/p02pc9zn.rss"
@@ -53,8 +53,8 @@
     "slug": "grammar",
     "id": "p02pc9wq",
     "name": "Learning English Grammar",
-    "count": 335,
-    "newest": "2026-11-17 Hobbies",
+    "count": 336,
+    "newest": "2026-11-24 Predicting the future",
     "m3u8": "https://raw.githubusercontent.com/jerryrat/BBC-LEARNING/playlists/grammar.m3u8",
     "cdn": "https://cdn.jsdelivr.net/gh/jerryrat/BBC-LEARNING@playlists/grammar.m3u",
     "rss": "https://podcasts.files.bbci.co.uk/p02pc9wq.rss"
