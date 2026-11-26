@@ -1,6 +1,8 @@
 #EXTM3U
 #PLAYLIST:6 Minute English
 #EXTIMG:https://ichef.bbci.co.uk/images/ic/3000x3000/p0hxqkd0.jpg
+#EXTINF:402 tvg-logo="https://ichef.bbci.co.uk/images/ic/3000x3000/p0hxqkd0.jpg" group-title="6 Minute English",2026-11-26 Is Gen Z getting less intelligent?
+https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-rss-low/proto/https/vpid/p0ppzxv4.mp3
 #EXTINF:403 tvg-logo="https://ichef.bbci.co.uk/images/ic/3000x3000/p0hxqkd0.jpg" group-title="6 Minute English",2026-11-19 Are microplastics harming us?
 https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-rss-low/proto/https/vpid/p0pnsz8p.mp3
 #EXTINF:411 tvg-logo="https://ichef.bbci.co.uk/images/ic/3000x3000/p0hxqkd0.jpg" group-title="6 Minute English",2026-11-12 Learning from different generations
