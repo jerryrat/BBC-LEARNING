@@ -1,6 +1,8 @@
 #EXTM3U
 #PLAYLIST:Learning Easy English
 #EXTIMG:https://ichef.bbci.co.uk/images/ic/3000x3000/p0hsrvhm.jpg
+#EXTINF:463 tvg-logo="https://ichef.bbci.co.uk/images/ic/3000x3000/p0hsrvhm.jpg" group-title="Learning Easy English",2026-11-27 Real Easy English: Talking about tea
+https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-rss/proto/https/vpid/p0pq6lbm.mp3
 #EXTINF:504 tvg-logo="https://ichef.bbci.co.uk/images/ic/3000x3000/p0hsrvhm.jpg" group-title="Learning Easy English",2026-11-24 Real Easy English: Talking about embarrassing moments
 https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-rss/proto/https/vpid/p0ppl9wl.mp3
 #EXTINF:458 tvg-logo="https://ichef.bbci.co.uk/images/ic/3000x3000/p0hsrvhm.jpg" group-title="Learning Easy English",2026-11-13 Real Easy English: Talking about the countryside
